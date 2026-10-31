@@ -16,6 +16,7 @@
   <script src="scripts/i18n.js"></script>
   <link rel="stylesheet" href="styles/ui-zoom-tokens.css">
   <link rel="stylesheet" href="styles/dictation-experience.css">
+  <link rel="stylesheet" href="styles/meeting-player.css">
   <style>
     @font-face {
       font-family: 'Instrument Serif';
@@ -7871,6 +7872,7 @@ Mat" required maxlength="8192"></textarea></label><div class="dictation-form-act
   <script src="scripts/update-offer.js"></script>
   <script src="scripts/recording-audio.js"></script>
   <script src="scripts/recall-chat.js"></script>
+  <script src="scripts/meeting-player.js"></script>
   <script>
     const { invoke } = window.__TAURI__.core;
 
@@ -11219,6 +11221,7 @@ Mat" required maxlength="8192"></textarea></label><div class="dictation-form-act
     function closeDetailView() {
       const wasOpen = detailOverlay.classList.contains('active');
       detailOverlay.classList.remove('active');
+      window.MinutesMeetingPlayer?.detach();
       if (wasOpen && detailReturnFocusPath) {
         const row = [...meetingsScroll.querySelectorAll('.meeting-item')]
           .find((candidate) => candidate.dataset.path === detailReturnFocusPath);
@@ -11810,6 +11813,7 @@ Mat" required maxlength="8192"></textarea></label><div class="dictation-form-act
           const body = document.createElement('div');
           body.className = 'detail-section-body';
           if (/^transcript$/i.test(section.heading || '') || !section.content) {
+            if (section.content) body.dataset.transcript = '';
             setHighlightedText(body, section.content || 'No content', activeSearchQuery);
           } else {
             // Summary, decisions and notes are markdown; raw `- [ ]` and `**`
@@ -11848,6 +11852,9 @@ Mat" required maxlength="8192"></textarea></label><div class="dictation-form-act
       detailOverlay.classList.add('active');
       persistRecallWorkspaceState({ currentMeetingPath: detail.path });
       scrollDetailToFirstMatch();
+      window.MinutesMeetingPlayer?.attach(detail, detailScroll, {
+        highlightText: (el) => highlightTextNodes(el, activeSearchQuery),
+      });
     }
 
     // Opened from a search: land on the first match in the meeting's text
@@ -19307,6 +19314,7 @@ Mat" required maxlength="8192"></textarea></label><div class="dictation-form-act
       // newly-active md-viewer is actually visible.
       if (detailOverlay.classList.contains('active')) {
         detailOverlay.classList.remove('active');
+        window.MinutesMeetingPlayer?.detach();
         // Hiding the overlay bypasses closeDetailView(), so drop any armed
         // "Confirm?" state and its pinned width with it, and clear the banner —
         // which also releases the card pin. Without the clear, a persistent

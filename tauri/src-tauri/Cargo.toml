@@ -20,7 +20,7 @@ metal = ["minutes-core/metal"]
 vulkan = ["minutes-core/vulkan"]
 
 [dependencies]
-tauri = { version = "2", features = ["tray-icon", "image-png", "devtools", "macos-private-api"] }
+tauri = { version = "2", features = ["tray-icon", "image-png", "devtools", "macos-private-api", "protocol-asset"] }
 tauri-plugin-shell = "2"
 tauri-plugin-global-shortcut = "2"
 tauri-plugin-dialog = "2"

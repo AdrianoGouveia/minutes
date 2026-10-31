@@ -1,0 +1,89 @@
+/* Synced meeting player (scripts/meeting-player.js). Tokens only: no new
+   fonts, colours or radii beyond DESIGN.md. */
+
+.meeting-player {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding: 8px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.meeting-player.is-error {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.meeting-player-btn {
+  flex: none;
+  min-width: 34px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.meeting-player-seek {
+  flex: 1;
+  min-width: 60px;
+  accent-color: var(--accent);
+}
+
+.meeting-player-time {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+
+.meeting-transcript {
+  white-space: normal;
+}
+
+.meeting-line {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 8px;
+  align-items: baseline;
+  padding: 3px 6px;
+  margin: 0 -6px;
+  border-radius: var(--radius);
+}
+
+.meeting-line.is-current {
+  background: var(--surface-fill-strong);
+  color: var(--text-primary);
+}
+
+.meeting-line-stamp {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-tertiary);
+}
+
+.meeting-line-stamp:hover,
+.meeting-line-stamp:focus-visible,
+.meeting-line.is-current .meeting-line-stamp {
+  color: var(--accent);
+}
+
+.meeting-line-speaker {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--text-secondary);
+}
+
+.meeting-line-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}

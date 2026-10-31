@@ -45,6 +45,14 @@ window.__MINUTES_I18N['pt-BR'] = {
     // ── Quick note / search ─────────────────────────────────────────
     "Quick note...": "Nota rápida...",
     "Save": "Salvar",
+    "Meeting audio player": "Player de áudio da reunião",
+    "Play": "Reproduzir",
+    "Pause": "Pausar",
+    "Back 15 seconds": "Voltar 15 segundos",
+    "Forward 15 seconds": "Avançar 15 segundos",
+    "Seek": "Posição",
+    "Playback speed": "Velocidade",
+    "Could not play this recording.": "Não foi possível reproduzir esta gravação.",
     "Collapse list pane": "Recolher painel da lista",
     "Documents": "Documentos",
     "Search recordings...": "Buscar gravações...",
@@ -1106,6 +1114,7 @@ window.__MINUTES_I18N['pt-BR'] = {
     "Yoruba": "Iorubá"
   },
   patterns: [
+    { re: "^Play from (\\d[\\d:]*)$", to: "Reproduzir a partir de $1" },
     { re: "^Parakeet v3 \\((\\d+) MB, recommended\\)$", to: "Parakeet v3 ($1 MB, recomendado)" },
     { re: "^Downloading Parakeet v3: (.+) of (.+)$", to: "Baixando o Parakeet v3: $1 de $2" },
     { re: "^Parakeet v3 did not install \\((.+)\\)\\. Whisper Base is ready; you can install Parakeet later in Settings, Transcription\\.$", to: "O Parakeet v3 não foi instalado ($1). O Whisper Base está pronto; você pode instalar o Parakeet depois em Ajustes, Transcrição." },
