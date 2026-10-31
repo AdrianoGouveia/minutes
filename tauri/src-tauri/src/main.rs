@@ -28,6 +28,7 @@ mod context;
 mod dictation_experience;
 mod dictation_field;
 mod meeting_audio;
+mod meeting_export;
 mod palette_dispatch;
 mod parakeet_install_commands;
 mod pty;
@@ -3290,6 +3291,8 @@ fn main() {
             commands::cmd_copy_path,
             commands::cmd_get_meeting_detail,
             meeting_audio::cmd_meeting_audio_source,
+            meeting_export::cmd_export_meeting_text,
+            meeting_export::cmd_email_meeting,
             commands::cmd_resummarize_meeting,
             commands::cmd_resummarize_status,
             commands::cmd_list_voices,

@@ -7873,6 +7873,7 @@ Mat" required maxlength="8192"></textarea></label><div class="dictation-form-act
   <script src="scripts/recording-audio.js"></script>
   <script src="scripts/recall-chat.js"></script>
   <script src="scripts/meeting-player.js"></script>
+  <script src="scripts/meeting-export.js"></script>
   <script>
     const { invoke } = window.__TAURI__.core;
 
@@ -10855,6 +10856,8 @@ Mat" required maxlength="8192"></textarea></label><div class="dictation-form-act
             },
           },
           { item: 'Separator' },
+          ...(window.MinutesMeetingExport?.menuItems(meeting, { menuLabel, action, showActionToast }) || []),
+          { item: 'Separator' },
         );
       }
       items.push(
@@ -11222,6 +11225,7 @@ Mat" required maxlength="8192"></textarea></label><div class="dictation-form-act
       const wasOpen = detailOverlay.classList.contains('active');
       detailOverlay.classList.remove('active');
       window.MinutesMeetingPlayer?.detach();
+      window.MinutesMeetingExport?.clearPrintView();
       if (wasOpen && detailReturnFocusPath) {
         const row = [...meetingsScroll.querySelectorAll('.meeting-item')]
           .find((candidate) => candidate.dataset.path === detailReturnFocusPath);
@@ -19315,6 +19319,7 @@ Mat" required maxlength="8192"></textarea></label><div class="dictation-form-act
       if (detailOverlay.classList.contains('active')) {
         detailOverlay.classList.remove('active');
         window.MinutesMeetingPlayer?.detach();
+        window.MinutesMeetingExport?.clearPrintView();
         // Hiding the overlay bypasses closeDetailView(), so drop any armed
         // "Confirm?" state and its pinned width with it, and clear the banner —
         // which also releases the card pin. Without the clear, a persistent

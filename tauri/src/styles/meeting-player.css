@@ -87,3 +87,62 @@
   white-space: pre-wrap;
   word-break: break-word;
 }
+
+/* Print-only meeting copy (scripts/meeting-export.js). Paper is always
+   black on white, whatever the screen theme. */
+#meeting-print {
+  display: none;
+}
+
+@media print {
+  body > *:not(#meeting-print) {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  #meeting-print {
+    display: block;
+    color: #000;
+    font-family: var(--font-sans);
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  #meeting-print * {
+    color: #000 !important;
+    background: none !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  #meeting-print h1 {
+    font-size: 18pt;
+    margin: 0 0 4pt;
+  }
+
+  .meeting-print-meta {
+    margin: 0 0 14pt;
+    font-family: var(--font-mono);
+    font-size: 9pt;
+  }
+
+  #meeting-print .detail-section {
+    break-inside: auto;
+  }
+
+  #meeting-print .detail-section-title,
+  #meeting-print .detail-context-label {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 14pt 0 6pt;
+  }
+
+  #meeting-print .meeting-line {
+    break-inside: avoid;
+  }
+}
